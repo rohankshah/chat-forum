@@ -7,6 +7,8 @@ import { updateUserProfile, getUserProfile } from "../actions/profile-actions";
 function ProfilePage() {
   const dispatch = useDispatch();
 
+  const profileInfo = useSelector((state) => state && state.profileInfo);
+
   const [fullName, setFullName] = useState("");
   const [country, setCountry] = useState("");
   const [bio, setBio] = useState("");
@@ -15,14 +17,20 @@ function ProfilePage() {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight);
-    dispatch(getUserProfile);
+    dispatch(getUserProfile());
   }, []);
 
+  useEffect(() => {
+    console.log(profileInfo);
+    if (Object.keys(profileInfo).length > 0) {
+      profileInfo.name !== undefined && setFullName(profileInfo.name);
+      profileInfo.country !== undefined && setCountry(profileInfo.country);
+      profileInfo.bio !== undefined && setBio(profileInfo.bio);
+    }
+  }, [profileInfo]);
+
   function handleSave() {
-    dispatch(updateUserProfile((fullName, country, bio)));
-    setFullName("");
-    setCountry("");
-    setBio("");
+    dispatch(updateUserProfile(fullName, country, bio));
   }
 
   return (
