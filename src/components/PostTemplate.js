@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import moment from "moment/moment";
+import { Link, useHistory } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 function PostTemplate(props) {
+  const history = useHistory();
+
   return (
     <Box
       sx={{
@@ -10,6 +13,12 @@ function PostTemplate(props) {
         borderRadius: "20px",
         p: "25px",
         mb: "15px",
+        "&:hover": {
+          cursor: "pointer",
+        },
+      }}
+      onClick={() => {
+        history.push(`/posts/${props.postId}`);
       }}
     >
       <Typography sx={{ color: "white", fontWeight: "bold", mb: "5px" }}>

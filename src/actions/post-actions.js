@@ -42,9 +42,9 @@ function createNewPost({ title, body }) {
       userId: uid,
       timestamp: serverTimestamp(),
     };
-    addDoc(collection(db, "posts"), newPost).then(() =>
-      dispatch(postCreationSuccess(newPost))
-    );
+    addDoc(collection(db, "posts"), newPost).then((doc) => {
+      dispatch(postCreationSuccess({ data: newPost, postId: doc.id }));
+    });
   };
 }
 

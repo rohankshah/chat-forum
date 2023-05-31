@@ -3,6 +3,7 @@ const initialState = {
   profileInfo: {},
   loggedIn: false,
   postArr: [],
+  commentArr: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -29,6 +30,30 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       postArr: action.payload,
+    };
+  }
+  if (action.type === "POST-CREATE-SUCCESS") {
+    return {
+      ...state,
+      postArr: [...state.postArr, action.payload],
+    };
+  }
+  if (action.type === "FETCH-COMMENT-SUCCESS") {
+    return {
+      ...state,
+      commentArr: action.payload,
+    };
+  }
+  if (action.type === "CLEAR-COMMENTS") {
+    return {
+      ...state,
+      commentArr: [],
+    };
+  }
+  if (action.type === "ADD-COMMENT-SUCCESS") {
+    return {
+      ...state,
+      commentArr: [...state.commentArr, action.payload],
     };
   }
   return {

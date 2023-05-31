@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import MainFeed from "./pages/MainFeed";
 import ProfilePage from "./pages/ProfilePage";
+import PostPage from "./pages/PostPage";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -22,6 +23,9 @@ function App() {
       </Route>
       <Route path="/profile">
         {loggedIn ? <ProfilePage /> : <Redirect to="/" />}
+      </Route>
+      <Route path="/posts/:postId">
+        {loggedIn ? <PostPage /> : <Redirect to="/" />}
       </Route>
     </BrowserRouter>
   );
